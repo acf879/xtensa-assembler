@@ -25,6 +25,12 @@ bool generate_empty_binary(const char* assembler_file_name,
 
 bool assemble_binary_file(const char* assembler_file_name,
     const char* bin_file_name) {
+  FILE* bin_file = fopen(bin_file_name, "wb");
+  FILE* assembly_file = fopen(assembler_file_name, "r");
+
+
+  fclose(bin_file);
+  fclose(assembly_file);
   return true;
 }
 

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+../assembler/asm-xtensa $1

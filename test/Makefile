@@ -19,3 +19,6 @@ $(ASM)/main.o : $(ASM_SRC)/main.c | $(ASM)
 
 $(ASM)/asm-xtensa : $(ASM)/main.o | $(ASM)
 	$(CC) $(CFLAGS) $< -o $@
+
+edit_main_c:
+	nvim ../assembler/src/main.c
