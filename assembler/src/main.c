@@ -14,7 +14,6 @@ struct assembly_line {
 };
 
 struct assembly_code {
-  char* label;
   size_t num_lines;
   struct assembly_line* lines;
 };
@@ -173,7 +172,6 @@ struct assembly_line* _extract_instructions_and_labels(char* line_to_parse, stru
        label[strlen(label)-1] = '\0'; // get rid of ':' char for label on seperate line
      }
      line_to_parse = last_label_char_ptr+1;
-     printf("LABEL IS %s\n", label);
      if (strncpy(code_line->label, label, strlen(label)) == NULL) {
         return (struct assembly_line*)NULL;
      }
@@ -199,7 +197,6 @@ struct assembly_line* _extract_instructions_and_labels(char* line_to_parse, stru
     if (strncpy(code_line->instruction, asm_instruction, strlen(asm_instruction)) == NULL) {
         return (struct assembly_line*)NULL;
     }
-    printf("Registers and Imm are: %s\n", registers_and_imm);
     // Grab the registers dynamically and check for if the last is immediate or a reg
     char reg_ret_or_src[4]; // ret reg
     char reg_src_or_imm[11]; // src reg
@@ -207,9 +204,9 @@ struct assembly_line* _extract_instructions_and_labels(char* line_to_parse, stru
     if (_extract_immediate_and_registers(registers_and_imm, reg_ret_or_src, reg_src_or_imm, reg_or_imm) == NULL) {
       return (struct assembly_line*)NULL;
     }
-    printf("RET/SRC register is %s\n", reg_ret_or_src);
-    printf("SRC/IMM register is %s\n", reg_src_or_imm);
-    printf("SRC2/IMM register is %s\n", reg_or_imm);
+    /** CHECK INSTRUCTION TO SEE IF WHAT IS AN IMM OR A REG THEN PACK THE ASSEMBLY LINE STRUCT
+     *
+     */
     iter++; 
   }
   return code_line;
